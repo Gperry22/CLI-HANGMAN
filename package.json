@@ -1,0 +1,19 @@
+{
+  "name": "node_hangman_2",
+  "version": "1.0.0",
+  "description": "Node Version of Hangman",
+  "main": "Index.js",
+  "scripts": {
+    "test": "node Index.js"
+  },
+  "keywords": [
+    "node.js",
+    "hangman"
+  ],
+  "author": "Gabe Perry",
+  "license": "ISC",
+  "dependencies": {
+    "clear": "0.0.1",
+    "inquirer": "^5.1.0"
+  }
+}
