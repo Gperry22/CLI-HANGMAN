@@ -6,36 +6,63 @@
 
 var Letter = require("./Letter.js");
 
-var Word = function (currentWord, hint) {
-    this.currentWordArray = [];
-    for (let i = 0; i < currentWord.length; i++) {
-        var newLetter = new Letter(currentWord[i]);
-        this.currentWordArray.push(newLetter);
-    }
+var Word = function(currentWord, hint) {
+  this.currentWordArray = [];
+  this.wordFound = false;
+  // this.letterOutputArray = [];
+  for (let i = 0; i < currentWord.length; i++) {
+    var newLetter = new Letter(currentWord[i]);
+    this.currentWordArray.push(newLetter);
+  }
 
-    this.wordString = function () {
-        this.letterOutputArray = [];
+  this.wordString = function() {
+    this.letterOutputArray = [];
+    for (let i = 0; i < this.currentWordArray.length; i++) {
+      var outputLetter = this.currentWordArray[i].letterOuput();
+      this.letterOutputArray.push(outputLetter);
+    }
+    console.log("\n" + hint);
+    console.log(this.letterOutputArray.join(" "));
+  };
+
+  this.checkLetterGuessed = function(guessedLetter) {
+    for (let i = 0; i < this.currentWordArray.length; i++) {
+      this.currentWordArray[i].checkLetter(guessedLetter)
+        // return true;   
+    }
+  };
+  this.didWeFindTheWord = function(){
         for (let i = 0; i < this.currentWordArray.length; i++) {
-            var outputLetter = this.currentWordArray[i].letterOuput();
-            this.letterOutputArray.push(outputLetter);
+          if (this.currentWordArray[i].letterGuessedCorrectly === true) {
+            this.wordFound = true;
+          } else {
+            this.wordFound = false;
+          }
         }
-        console.log("\n" + hint);
-        console.log(this.letterOutputArray.join(" "));
-    }
+  }
+};
 
-    this.checkLetterGuessed = function (guessedLetter) {
-        for (let i = 0; i < this.currentWordArray.length; i++) {
-            this.currentWordArray[i].checkLetter(guessedLetter);
-
-
-        }
-    }
-}
 
 // var gabe = new Word ("bull", "horns");
 // gabe.wordString();
 // gabe.checkLetterGuessed('u');
+// gabe.wordString();
 // console.log(gabe.currentWordArray);
-// console.log(gabe.currentWordArray[1]);
+// console.log(gabe.letterOutputArray);
+// console.log(gabe.wordFound);
+
+
+// gabe.checkLetterGuessed("l");
+// gabe.wordString();
+// console.log(gabe.currentWordArray);
+// console.log(gabe.letterOutputArray);
+// console.log(gabe.wordFound);
+
+// gabe.checkLetterGuessed("b");
+// gabe.wordString();
+// console.log(gabe.currentWordArray);
+// console.log(gabe.letterOutputArray);
+// gabe.didWeFindTheWord();
+// console.log(gabe.wordFound);
 
 module.exports = Word;
