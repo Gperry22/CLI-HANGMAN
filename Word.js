@@ -26,11 +26,16 @@ var Word = function(currentWord, hint) {
   };
 
   this.checkLetterGuessed = function(guessedLetter) {
+    let finder = false;
     for (let i = 0; i < this.currentWordArray.length; i++) {
-      this.currentWordArray[i].checkLetter(guessedLetter)
-        // return true;   
+      this.currentWordArray[i].checkLetter(guessedLetter);
+      if (this.currentWordArray[i].checkLetter(guessedLetter)) {
+        finder = true;
+      }
     }
+    return finder;
   };
+
   this.didWeFindTheWord = function(){
         for (let i = 0; i < this.currentWordArray.length; i++) {
           if (this.currentWordArray[i].letterGuessedCorrectly === true) {
